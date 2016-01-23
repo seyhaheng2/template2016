@@ -1,0 +1,20 @@
+<div class="show-post">
+	<h2 class='post-title' style="margin-bottom: 45px;"><%= @post.name %></h2>
+	<div class="lineauto"></div>
+	<div class="alignq">
+		<span class="bg-date">
+			<span class="post-category"><%= @post.subcategory.name if @post.subcategory %></span>
+			<span class="dot-sep">·</span>
+			<span class="post-category"><%= @post.created_at.strftime("%b %d, %Y") %></span>
+		</span>
+	</div>
+		<%= image_tag @post.image %>
+	<div class="container-fluid show-desc" style="margin-top:20px;">
+		<p>
+			<%= @post.description.html_safe %>
+			<div style="margin-top:40px;">
+				<%= render 'disqus' %>
+			</div>
+		</p>
+	</div>
+</div>

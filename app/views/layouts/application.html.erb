@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title><%= @meta_title %></title>
+		<meta name="description" content="<%= @meta_description %>">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<%= javascript_include_tag "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js", "https://oss.maxcdn.com/respond/1.4.2/respond.min.js" %>
+		<![endif]-->
+
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+		<%= csrf_meta_tags %>
+	</head>
+	<body>
+		<%= render 'layouts/header' %>
+			<% flash.each do |name, msg| %>
+				<%= content_tag :div, class: "alert alert-#{ name == :error ? "danger" : "success" } alert-dismissable", role: "alert" do %>
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<%= msg %>
+				<% end %>
+			<% end %>
+		<div class="row no-gutter" style='margin-left:0px;margin-right:0px;' >
+			<div class="col-lg-9" style="background: #fff;border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;">
+				<%= yield %>
+			</div>
+			<div class="col-lg-3">
+				<h1>dgkie</h1>
+			</div>
+		</div>
+
+		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=523828127739316";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+
+		<script id="dsq-count-scr" src="//upotos.disqus.com/count.js" async></script>
+	</body>
+</html>

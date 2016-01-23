@@ -1,0 +1,63 @@
+	<% @posts.each do |post| %>
+		<% if cycle('odd', 'even') == 'odd' %>
+			<div class="row no-gutter" style="margin-left: 0px; margin-right:0px;">
+				<div class="col-lg-6 post-pad">
+					<div class="post-cat" style="float:right;"><%= post.subcategory.name if post.subcategory %>
+					<div class="line"></div>
+					</div>
+					<h2 class="post-title align-right" style="text-align:right;">
+						<%= link_to post_path(post) do %>
+							<%= post.name %>
+						<% end %>
+						</h2>
+					<div class="post-desc">
+						<p> <%= truncate( raw( sanitize(post.description, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 140, :omission => "....") %></p>
+						<div class="shared_btn" style="margin-top:32px;">
+							<span class="post-date">
+									 <%= post.created_at.strftime("%b %d, %Y") %>
+							</span>
+							<div class="share_box" style="float:right;">
+								<a onclick="javascript:window.open('http://facebook.com/sharer.php?u=<%= url_for([post, {only_path: false}]) %>', '_blank', 'width=800,height=500, top=200, left=300');void(0);"><i class="fa fa-facebook"></i></a>
+								<a onclick="javascript:window.open('http://twitter.com/share?text=<%= post.name %> by @seyhaheng - &amp;url=<%= url_for([post,{only_path: false}]) %>', '_blank', 'width=800,height=500, top=200, left=300');void(0);"><i class="fa fa-twitter"></i></a>
+								<a onclick="javascript:window.open('http://plus.google.com/share?url=<%= url_for([post, {only_path: false}]) %>', '_blank', 'width=800,height=500, top=200, left=300');void(0);"> <i class="fa fa-google-plus"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<%= image_tag post.image.url(:med), class: 'post-image img-responsive' %>
+				</div>
+			</div>
+		<% else %>
+			<div class="row no-gutter" style="margin-left: 0px; margin-right:0px;">
+				<div class="col-lg-6">
+					<%= image_tag post.image.url(:med), class: 'post-image img-responsive' %>
+				</div>
+				<div class="col-lg-6 post-pad">
+					<div class="post-cat"><%= post.subcategory.name if post.subcategory %>
+					<div class="line-left" style="float:left;"></div>
+					</div>
+					<h2 class="post-title" style="text-align:left;">
+						<%= link_to post_path(post) do %>
+							<%= post.name %>
+						<% end %>
+						</h2>
+					<div class="post-desc">
+						<p> <%= truncate( raw( sanitize(post.description, :tags => %w(table tr td), :attributes => %w(id class style) ) ), :length => 140, :omission => "....") %></p>
+						<div class="shared_btn" style="margin-top:32px;">
+							<span class="post-date">
+									 <%= post.created_at.strftime("%b %d, %Y") %>
+							</span>
+							<span class="dot-sep">·</span>
+							<div class="share_box" style="float:right;">
+								<a onclick="javascript:window.open('http://facebook.com/sharer.php?u=<%= url_for([post, {only_path: false}]) %>', '_blank', 'width=800,height=500, top=200, left=300');void(0);"><i class="fa fa-facebook"></i></a>
+								<a onclick="javascript:window.open('http://twitter.com/share?text=<%= post.name %> by @seyhaheng - &amp;url=<%= url_for([post,{only_path: false}]) %>', '_blank', 'width=800,height=500, top=200, left=300');void(0);"><i class="fa fa-twitter"></i></a>
+								<a onclick="javascript:window.open('http://plus.google.com/share?url=<%= url_for([post, {only_path: false}]) %>', '_blank', 'width=800,height=500, top=200, left=300');void(0);"> <i class="fa fa-google-plus"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<% end %>
+	<% end %>
